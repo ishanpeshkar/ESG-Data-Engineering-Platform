@@ -12,7 +12,6 @@ SILVER_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
 def load_bronze_pdf_records() -> list:
-    """Loads all bronze PDF JSON files into memory."""
     records = []
     for json_file in BRONZE_PDF_DIR.glob("*.json"):
         with open(json_file, "r", encoding="utf-8") as f:
@@ -20,30 +19,34 @@ def load_bronze_pdf_records() -> list:
     return records
 
 
-def extract_field(text: str, patterns: list) -> str:
+def extract_field(text: str, patterns: list, max_len: int = 120) -> str:
     """
-    Tries each regex pattern in order against the text.
-    Returns the first match found, or None.
+    Tries each regex pattern in order. Returns first match, trimmed and
+    capped in length (to avoid grabbing runaway sentences).
     """
     for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE)
+        match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
         if match:
-            return match.group(1).strip()
+            value = match.group(1).strip()
+            # Reject matches that are clearly not real values (too long = probably
+            # grabbed a whole sentence/paragraph instead of a field value)
+            if 0 < len(value) <= max_len:
+                return value
     return None
 
 
 def clean_pdf_records(records: list) -> pd.DataFrame:
-    """
-    For each PDF bronze record, joins all page text into one blob,
-    then attempts simple rule-based extraction of a few known EPD fields.
-    """
     rows = []
 
     for record in records:
         source_file = record["source_file"]
         extracted_at = record["extracted_at"]
 
-        # Join all pages into one big text blob for this document
+        # Prioritize first 3 pages — EPD "declaration summary" info is almost
+        # always near the front, not buried deep in the document
+        front_pages_text = "\n".join(
+            page["text"] for page in record["pages"][:3]
+        )
         full_text = "\n".join(page["text"] for page in record["pages"])
 
         row = {
@@ -52,31 +55,34 @@ def clean_pdf_records(records: list) -> pd.DataFrame:
             "page_count": len(record["pages"]),
             "char_count": len(full_text),
 
-            # --- Simple rule-based field extraction (placeholder logic) ---
-            # These patterns are naive on purpose — this is just to prove
-            # the "unstructured text -> structured field" concept.
-            # Real structured extraction (inventory, methodology, results
-            # overview, EPD scenarios etc.) comes later via schema-driven
-            # LLM extraction.
-            "product_name": extract_field(full_text, [
-                r"Product\s*Name[:\-]?\s*(.+)",
-                r"Product[:\-]?\s*(.+)"
+            "product_name": extract_field(front_pages_text, [
+                r"^Product\s*Name\s*[:\-]\s*(.+)$",
+                r"^Product\s*[:\-]\s*(.+)$",
+            ], max_len=80) or extract_field(front_pages_text, [
+                r"Product\s*Name\s*[:\-]\s*(.+)",
+            ], max_len=80),
+
+            "declared_unit": extract_field(front_pages_text, [
+                r"Declared\s*Unit\s*[:\-]\s*([^\n\.]{1,80})",
             ]),
-            "declared_unit": extract_field(full_text, [
-                r"Declared\s*Unit[:\-]?\s*(.+)"
+
+            "reporting_period": extract_field(front_pages_text, [
+                r"(?:Reporting|Validity)\s*Period\s*[:\-]\s*([^\n\.]{1,60})",
+                r"Issue\s*[Dd]ate\s*[:\-]\s*([^\n]{1,40})",
+                r"Valid\s*(?:until|to)\s*[:\-]?\s*([^\n\.]{1,40})",
             ]),
-            "reporting_period": extract_field(full_text, [
-                r"Reporting\s*Period[:\-]?\s*(.+)",
-                r"Validity\s*Period[:\-]?\s*(.+)"
-            ]),
+
             "gwp_total": extract_field(full_text, [
-                r"GWP[\-\s]*total[:\-]?\s*([\d\.,]+)",
-                r"Global\s*Warming\s*Potential[:\-]?\s*([\d\.,]+)"
-            ]),
+                r"GWP[\-\s]*total[^\d\-]{0,15}(-?[\d]+[\.,]?\d*)",
+                r"Global\s*Warming\s*Potential[^\d\-]{0,20}(-?[\d]+[\.,]?\d*)",
+                r"(?:kg\s*CO2[\-\s]?e(?:q)?)[^\d\-]{0,10}(-?[\d]+[\.,]?\d*)",
+            ], max_len=20),
+
             "standard_reference": extract_field(full_text, [
-                r"(EN\s?15804[\+A-Za-z0-9]*)",
-                r"(ISO\s?14025)"
-            ]),
+                r"(EN\s?15804\+?A?\d?)",
+                r"(ISO\s?14025)",
+                r"(ISO\s?21930)",
+            ], max_len=20),
         }
         rows.append(row)
 
@@ -85,7 +91,6 @@ def clean_pdf_records(records: list) -> pd.DataFrame:
 
 
 def save_to_duckdb(df: pd.DataFrame, table_name: str = "silver_pdf_esg_data"):
-    """Writes the cleaned DataFrame into DuckDB as a table (replaces if exists)."""
     con = duckdb.connect(str(SILVER_DB_PATH))
     con.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM df")
     row_count = con.execute(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]
