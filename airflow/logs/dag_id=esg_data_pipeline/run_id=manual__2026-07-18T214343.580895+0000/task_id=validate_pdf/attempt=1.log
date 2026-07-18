@@ -1,0 +1,34 @@
+[2026-07-18T21:45:18.287+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-07-18T21:45:18.327+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: esg_data_pipeline.validate_pdf manual__2026-07-18T21:43:43.580895+00:00 [queued]>
+[2026-07-18T21:45:18.352+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: esg_data_pipeline.validate_pdf manual__2026-07-18T21:43:43.580895+00:00 [queued]>
+[2026-07-18T21:45:18.355+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2026-07-18T21:45:18.385+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): validate_pdf> on 2026-07-18 21:43:43.580895+00:00
+[2026-07-18T21:45:18.410+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=391) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2026-07-18T21:45:18.415+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'esg_data_pipeline', 'validate_pdf', 'manual__2026-07-18T21:43:43.580895+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/esg_pipeline_dag.py', '--cfg-path', '/tmp/tmp10o8bzkz']
+[2026-07-18T21:45:18.418+0000] {standard_task_runner.py:72} INFO - Started process 393 to run task
+[2026-07-18T21:45:18.419+0000] {standard_task_runner.py:105} INFO - Job 10: Subtask validate_pdf
+[2026-07-18T21:45:18.569+0000] {task_command.py:467} INFO - Running <TaskInstance: esg_data_pipeline.validate_pdf manual__2026-07-18T21:43:43.580895+00:00 [running]> on host 4f7460bab454
+[2026-07-18T21:45:19.106+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='ishan' AIRFLOW_CTX_DAG_ID='esg_data_pipeline' AIRFLOW_CTX_TASK_ID='validate_pdf' AIRFLOW_CTX_EXECUTION_DATE='2026-07-18T21:43:43.580895+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-18T21:43:43.580895+00:00'
+[2026-07-18T21:45:19.108+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2026-07-18T21:45:19.109+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2026-07-18T21:45:19.111+0000] {logging_mixin.py:190} INFO - Current task name:validate_pdf state:running start_date:2026-07-18 21:45:18.330128+00:00
+[2026-07-18T21:45:19.112+0000] {logging_mixin.py:190} INFO - Dag name:esg_data_pipeline and current dag run status:running
+[2026-07-18T21:45:19.114+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-07-18T21:45:19.117+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2026-07-18T21:45:19.119+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/esg_project && python -m src.validate.validate_pdf_data']
+[2026-07-18T21:45:19.141+0000] {subprocess.py:99} INFO - Output:
+[2026-07-18T21:45:21.937+0000] {subprocess.py:106} INFO - Loaded 24 rows from silver_pdf_esg_data
+[2026-07-18T21:45:21.941+0000] {subprocess.py:106} INFO - 
+[2026-07-18T21:45:21.944+0000] {subprocess.py:106} INFO - [PASS] All rows passed validation.
+[2026-07-18T21:45:22.270+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2026-07-18T21:45:22.353+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-07-18T21:45:22.355+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=esg_data_pipeline, task_id=validate_pdf, run_id=manual__2026-07-18T21:43:43.580895+00:00, execution_date=20260718T214343, start_date=20260718T214518, end_date=20260718T214522
+[2026-07-18T21:45:22.377+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2026-07-18T21:45:22.379+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2026-07-18T21:45:22.380+0000] {logging_mixin.py:190} INFO - Dag name:esg_data_pipeline queued_at:2026-07-18 21:43:43.605808+00:00
+[2026-07-18T21:45:22.383+0000] {logging_mixin.py:190} INFO - Task hostname:4f7460bab454 operator:BashOperator
+[2026-07-18T21:45:22.422+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-07-18T21:45:22.489+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-18T21:45:22.499+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
