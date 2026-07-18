@@ -1,0 +1,15 @@
+# --- Airflow runtime / generated ---
+logs/
+plugins/
+*.db
+*.pid
+*.cfg
+airflow.cfg
+webserver_config.py
+
+# --- Docker-generated ---
+# .env
+
+# --- Keep dags folder tracked, but ignore __pycache__ inside it ---
+dags/__pycache__/
+**/__pycache__/
