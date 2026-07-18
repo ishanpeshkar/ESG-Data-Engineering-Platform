@@ -1,0 +1,39 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# --- Environment / secrets ---
+.env
+*.env
+
+# --- Data (generated, not source) ---
+# data/bronze/
+# data/silver/
+# data/gold/
+# data/reports/
+# data/raw_inputs/
+
+# Keep folder structure but ignore contents (optional — see note below)
+# !data/raw_inputs/.gitkeep
+# !data/bronze/.gitkeep
+# !data/silver/.gitkeep
+# !data/gold/.gitkeep
+# !data/reports/.gitkeep
+
+# --- DuckDB files (binary, generated) ---
+*.duckdb
+*.duckdb.wal
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Jupyter ---
+.ipynb_checkpoints/

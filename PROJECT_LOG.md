@@ -199,4 +199,108 @@ a successful test of the validation logic, not a failure of the project.
 - Gold layer: valid/flagged split implemented and working
 
 
+
+## Phase 3 — Orchestration
+
+### Decision: Prefect vs Airflow
+- Initially considered Prefect for simplicity (pure Python, no Docker needed, native
+  Windows support)
+- **Decision reversed:** chose Airflow instead, since it's more commonly required in
+  Data Engineering job listings and is a stronger resume/interview signal. Accepted the
+  added setup complexity (Docker + WSL2 required on Windows) as a worthwhile tradeoff
+  for industry-relevance over convenience.
+
+### Step 3.1 — WSL2 + Docker Setup
+Commands run:
+```bash
+wsl --update
+wsl --set-default-version 2
+docker --version
+docker run hello-world
+docker compose version
+```
+- WSL2 updated to version 2.7.10, set as default version successfully
+- Installed Docker Desktop (with WSL2 engine integration)
+- Verified with `docker --version` → Docker version 29.1.3
+- Verified with `docker run hello-world` → success, confirmed Docker daemon working
+  end-to-end (pull image → create container → run → stream output)
+- Verified with `docker compose version` → Docker Compose v5.0.1
+- **Result:** No errors. Docker + Compose fully working on first attempt.
+- **Status:** Done
+
+### Step 3.2 — Airflow Setup via Docker Compose
+Plan/commands:
+```bash
+mkdir airflow
+cd airflow
+mkdir dags logs plugins config
+```
+Downloaded official Airflow docker-compose.yaml (v2.10.4):
+```powershell
+Invoke-WebRequest -Uri "https://airflow.apache.org/docs/apache-airflow/2.10.4/docker-compose.yaml" -OutFile "docker-compose.yaml"
+```
+Created `.env` file inside `airflow/` folder:
+AIRFLOW_UID=50000
+
+- **Decision/note:** hardcoded `AIRFLOW_UID=50000` since Windows has no direct equivalent
+  of the Linux user-ID auto-detection the official docs assume — this is a standard,
+  documented workaround, not a hack.
+
+Initialization and startup:
+```bash
+docker compose up airflow-init
+docker compose up -d
+```
+Then accessed Airflow UI at `http://localhost:8080` (default login: airflow / airflow).
+
+**Result:** `docker compose up airflow-init` completed successfully (downloaded Airflow
+images, initialized metadata DB, created default admin user). `docker compose up -d`
+started all services in background. Airflow UI accessible at http://localhost:8080,
+logged in successfully with default credentials.
+
+**Status:** Done
+
+### Step 3.3 — Connect Airflow to Project Code
+- Edited `airflow/docker-compose.yaml`:
+  - Added volume mount: `../:/opt/airflow/esg_project` — makes the entire project folder
+    visible inside Airflow containers
+  - Set `_PIP_ADDITIONAL_REQUIREMENTS: pdfplumber pandas openpyxl duckdb pandera` so
+    Airflow's containers have the same dependencies as the local venv
+- Restarted with `docker compose down` then `docker compose up -d`
+- Verified mount with:
+```bash
+  docker exec -it airflow-airflow-scheduler-1 ls /opt/airflow/esg_project
+```
+  → Confirmed all project folders/files visible inside the container
+- **Status:** Done
+
+### Step 3.5 — First DAG Trigger
+- Triggered `esg_data_pipeline` DAG manually via Airflow UI
+- `extract_pdf` succeeded; `clean_pdf` failed with:
+  `ModuleNotFoundError: No module named 'duckdbQ'`
+- **Root cause:** stray typo in local `src/clean/pdf_cleaner.py` — line 5 read
+  `import duckdbQ` instead of `import duckdb`. Not an Airflow/Docker issue — this was
+  a pre-existing typo in the file that hadn't been re-run locally since introduced.
+  Airflow surfaced it because it executes the actual script fresh via BashOperator.
+- Downstream tasks (`validate_pdf`, `build_gold_layer`) correctly showed
+  `upstream_failed` status — demonstrating Airflow's dependency enforcement working
+  as intended (it correctly refused to run tasks whose prerequisite failed)
+- **Fix:** corrected import statement, re-triggered DAG
+- **Status:** In progress — pending confirmation of full successful run
+
+### Step 3.5 — First Successful End-to-End DAG Run
+- Fixed the `duckdbQ` typo in `pdf_cleaner.py`, re-triggered the DAG fresh
+- All 4 tasks completed successfully in order: extract_pdf → clean_pdf → validate_pdf →
+  build_gold_layer (each shown green in Airflow Graph view)
+- Verified output correctness by checking `gold_valid_records` / `gold_flagged_records`
+  row counts in DuckDB — matched the known-correct manual run result (0 valid, 8 flagged)
+
+**Milestone:** the full Phase 1 + Phase 2 pipeline (extraction, cleaning, schema
+validation, business-rule validation, gold layer split) is now running as a single
+orchestrated Airflow DAG instead of 4 manual script executions. This is the core
+"data engineering" deliverable of the project — a real, working pipeline with enforced
+task ordering, retry logic, and full execution/log history per run.
+
+**Status: Phase 3 core orchestration — Done.**
+
 *(to be filled in as we go)*

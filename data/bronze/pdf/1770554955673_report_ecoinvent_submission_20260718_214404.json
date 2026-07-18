@@ -1,0 +1,444 @@
+{
+  "source_file": "1770554955673_report_ecoinvent_submission.pdf",
+  "extracted_at": "2026-07-18T21:43:58.722922",
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "Accompanying summary for the dataset review:\n- spodumene concentrate production | AU\n- lithium brine concentration | CN\n- lithium carbonate production, battery grade, from concentrated\nbrine | CN\n- lithium brine concentration | US\n- lithium carbonate production, battery grade, from concentrated\nbrine | US\n- lithium brine concentration, Fenix | AR\n- lithium carbonate production, battery grade, from concentrated\nbrine, Fenix | AR\n- lithium brine concentration, Salar de Olaroz | AR\n- lithium carbonate production, battery grade, from concentrated\nbrine, Salar de Olaroz | AR\nJanurary 2026\nConfidential document – do not reshare\n1",
+      "tables": []
+    },
+    {
+      "page_number": 2,
+      "text": "Table of Contents\n1 INTRODUCTION 3\n2 BACKGROUND 4\n2.1 CURRENT LITHIUM PRODUCTION DATASET (UPSTREAM) 4\n3 NEW FRAMEWORK 5\n4 ALLOCATION OF SUBMISSIONS 8\n5 ECOINVENT SUBMISSION 9\n5.1 SPODUMENE PRODUCTION 9\n5.2 LITHIUM BRINE CONCENTRATION AND LITHIUM CARBONATE, BATTERY GRADE PRODUCTION\n12\n5.2.1 SITES OVERVIEW 15\n5.2.1.1 CHAERHAN,CN 15\n5.2.1.2 SALAR DE OLAROZ, AR 18\n5.2.1.3 FENIX, AR 21\n5.2.1.4 SILVER PEAK 24\n5.2.2 MASS BALANCE IN LITHIUM BRINE CONCENTRATION DATASETS 26\n5.2.3 MASS BALANCE IN LITHIUM CARBONATE, BATTERY GRADE DATASETS 28\n2",
+      "tables": []
+    },
+    {
+      "page_number": 3,
+      "text": "1 Introduction\nThis document accompanies the external review of the following datasets:\n• spodumene concentrate production | AU\n• lithium brine concentration | CN\n• lithium carbonate production, battery grade, from concentrated brine | CN\n• lithium brine concentration | US\n• lithium carbonate production, battery grade, from concentrated brine | US\n• lithium brine concentration, Fenix | AR\n• lithium carbonate production, battery grade, from concentrated brine, Fenix | AR\n• lithium brine concentration, Salar de Olaroz | AR\n• lithium carbonate production, battery grade, from concentrated brine, Salar de Olaroz |\nAR\nAdditionally, it provides an overview of the current ecoinvent framework for lithium in order to\ngive historical context, and presents the new framework and the regions that will be covered.\nThe document focuses on the datasets submitted to ecoinvent and supports the reviewer in\nunderstanding dataset scope, methodological choices, and consistency with the framework.\nDatasets that are part of the BRGM submission will be documented in a separate report that\ndetails modelling decisions, assumptions, data sources, and any related methodological\nchoices.\nThe report provides:\n• Context and system boundaries for the datasets\n• Key modelling decisions and deviations from original sources\n• Mass balance information\n• Climate change scores and comparison with literature\n3",
+      "tables": []
+    },
+    {
+      "page_number": 4,
+      "text": "2 Background\n2.1 Current Lithium production dataset (upstream)\nThe goal of this data submission is to improve the lithium supply chain in ecoinvent. The current\nstructure of the lithium supply chain is shown below. Lithium hydroxide is then produced from\nlithium carbonate GLO.\nFigure 1: ecoinvent v3.12 lithium framework\nHere the list of the datasets currently available in ecoinvent, with link to ecoQuery:\n- Lithium brine inspissation | GLO\n- Market for lithium brine, 6.7% Li | GLO\n- Lithium carbonate production, from concentrated brine | GLO\n- Spodumene production | AU\n- Spodumene production | RoW (copy of AU)\n- Market for spodumene | GLO\n- Lithium carbonate production, from spodumene | CN\n- Lithium carbonate production, from spodumene | RoW (copy of China)\n- Market for lithium carbonate | GLO\n- Lithium hydroxide production | GLO\n4",
+      "tables": []
+    },
+    {
+      "page_number": 5,
+      "text": "3 New framework\nTo address the gaps and improve geographical specificity in ecoinvent's lithium supply chain,\nwe have developed a comprehensive framework that captures the diversity of lithium\nproduction pathways globally, with recent data from literature. This framework distinguishes\nbetween two primary lithium extraction routes, hard-rock mining (spodumene) and brine\nextraction, and models region-specific processing chains that reflect current production\nmethods and geographical representation.\nThe framework captures the complete supply chain for lithium carbonate production from both\nprimary extraction routes. For brine-based sources, this includes evaporation pond operations\nto concentrate lithium-bearing brines, followed by chemical conversion to produce battery-\ngrade lithium carbonate (Li₂CO₃). For hard-rock sources, the chain covers mining operations\nand beneficiation to produce spodumene concentrate in Australia, and subsequent chemical\nconversion in China to produce battery-grade lithium carbonate from the imported Australian\nspodumene.\nAdditionally, lithium hydroxide monohydrate (LiOH·H₂O) production is also covered in China\nand Chile.\nThe framework thus captures the complete upstream-to-midstream supply chain, enabling\ncomprehensive life cycle assessments from raw material extraction through to the two main\nlithium chemical products used in battery manufacturing.\nThis structured approach enables more accurate life cycle assessments by:\n- Providing geographically differentiated datasets for key production regions (Australia,\nChina, United States, and Argentina)\n- Distinguishing between different salar operations where multiple sites exist within the\nsame country\n- Ensuring methodological consistency across all datasets\nFigure 2 and Table 1 below show the complete structure of activities and reference products.\nPlease note that the new framework will fully replace all the existing datasets in ecoinvent\nv3.12 and prior. Only the dataset ‘lithium hydroxide production’ will stay in the next release, as\nthis dataset represents the anhydrous technical grade of lithium hydroxide, typically used in the\nproduction of products such as: adhesives and sealants, lubricants and greases, fillers,\nputties, plasters, modelling clay, hydraulic fluids and metal working fluids.\n5",
+      "tables": []
+    },
+    {
+      "page_number": 6,
+      "text": "Figure 2: New lithium framework in ecoinvent\n6",
+      "tables": []
+    },
+    {
+      "page_number": 7,
+      "text": "In the table below, the name of the activities and their Reference Products are reported, to ensure consistency. The name of the site is explicit in the\ndataset only when multiple sites exist in the same geography.\nTable 1: summary of new datasets and relative reference products\nActivity name Geo Reference Product\nlithium brine concentration, Salar de Cauchari AR concentrated lithium brine, 6%Li\nlithium carbonate production, battery grade, from concentrated brine, Salar de Cauchari AR lithium carbonate, battery grade\nlithium brine concentration CL lithium carbonate, battery grade\nlithium carbonate production, battery grade, from concentrated brine CL concentrated lithium brine, 4.3%Li\nlithium hydroxide monohydrate production, from lithium carbonate CL lithium hydroxide monohydrate\nlithium carbonate production, battery grade, from spodumene concentrate, Shehong CN lithium carbonate, battery grade\nlithium carbonate production, battery grade, from spodumene concentrate,\nCN lithium carbonate, battery grade\nZhangjiagang\nlithium hydroxide monohydrate production, from spodumene concentrate CN lithium hydroxide monohydrate\nspodumene concentrate production AU spodumene concentrate\nlithium brine concentration CN concentrated lithium brine, 0.022%Li\nlithium brine concentration, Fenix AR concentrated lithium brine, 0.07%Li\nlithium brine concentration, Salar de Olaroz AR concentrated lithium brine, 1.2%Li\nlithium brine concentration US concentrated lithium brine, 0.6%Li\nlithium carbonate production, battery grade, from concentrated brine CN lithium carbonate, battery grade\nlithium carbonate production, battery grade, from concentrated brine, Salar de Olaroz AR lithium carbonate, battery grade\nlithium carbonate production, battery grade, from concentrated brine US lithium carbonate, battery grade\nlithium carbonate production, battery grade, from concentrated brine, Fenix AR lithium carbonate, battery grade\n7",
+      "tables": [
+        [
+          [
+            "",
+            "lithium brine concentration, Salar de Cauchari",
+            "",
+            "",
+            "AR",
+            "",
+            "",
+            "concentrated lithium brine, 6%Li",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "lithium brine concentration",
+            "",
+            "",
+            "CL",
+            "",
+            "",
+            "lithium carbonate, battery grade",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "lithium hydroxide monohydrate production, from lithium carbonate",
+            "",
+            "",
+            "CL",
+            "",
+            "",
+            "lithium hydroxide monohydrate",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "lithium carbonate production, battery grade, from spodumene concentrate,",
+            "",
+            "CN",
+            "lithium carbonate, battery grade"
+          ],
+          [
+            null,
+            "Zhangjiagang",
+            null,
+            null,
+            null
+          ]
+        ],
+        [
+          [
+            "",
+            "spodumene concentrate production",
+            "",
+            "",
+            "AU",
+            "",
+            "",
+            "spodumene concentrate",
+            ""
+          ]
+        ],
+        [
+          [
+            "lithium brine concentration, Fenix",
+            "AR",
+            "concentrated lithium brine, 0.07%Li"
+          ]
+        ],
+        [
+          [
+            "lithium brine concentration",
+            "US",
+            "concentrated lithium brine, 0.6%Li"
+          ]
+        ],
+        [
+          [
+            "lithium carbonate production, battery grade, from concentrated brine, Salar de Olaroz",
+            "AR",
+            "lithium carbonate, battery grade"
+          ]
+        ],
+        [
+          [
+            "",
+            "lithium carbonate production, battery grade, from concentrated brine, Fenix",
+            "",
+            "",
+            "AR",
+            "",
+            "",
+            "lithium carbonate, battery grade",
+            ""
+          ]
+        ]
+      ]
+    },
+    {
+      "page_number": 8,
+      "text": "4 Allocation of submissions\nThe datasets included in this framework are being developed through a collaborative effort\nbetween ecoinvent and BRGM (Bureau de Recherches Géologiques et Minières). Of the 17 total\ndatasets, BRGM will submit 8 datasets while the remaining 9 datasets will be submitted by\necoinvent.\nTable 2 displays the current plan for the allocation of submissions.\nDataset Submission done by\nCauchari Brines and carbonate | AR brgm (2 ds)\nOlaroz Brines and carbonate | AR ecoinvent (2ds)\nFenix brine and carbonate | AR ecoinvent (2ds)\nAtacama brines, carbonate, and hydroxide | CL brgm (3 ds)\nChaerhan brines and carbonate | CN ecoinvent (2ds)\nSilver Peak | US ecoinvent (2ds)\nGreenbushes spodumene | AU ecoinvent (1ds)\nShehong carbonate and hydroxide | CN brgm (2 ds)\nZhangjiang carbonate | CN brgm (1 ds)\n8",
+      "tables": [
+        [
+          [
+            "Dataset",
+            "Submission done by",
+            null,
+            null
+          ],
+          [
+            null,
+            "",
+            "brgm (2 ds)",
+            ""
+          ],
+          [
+            null,
+            "",
+            "ecoinvent (2ds)",
+            ""
+          ],
+          [
+            null,
+            "ecoinvent (2ds)",
+            "ecoinvent (2ds)",
+            null
+          ],
+          [
+            null,
+            "brgm (3 ds)",
+            null,
+            null
+          ],
+          [
+            null,
+            "",
+            "ecoinvent (2ds)",
+            ""
+          ],
+          [
+            null,
+            "",
+            "ecoinvent (2ds)",
+            ""
+          ],
+          [
+            null,
+            "",
+            "ecoinvent (1ds)",
+            ""
+          ],
+          [
+            null,
+            "brgm (2 ds)",
+            "brgm (2 ds)",
+            null
+          ],
+          [
+            null,
+            "",
+            "brgm (1 ds)",
+            ""
+          ]
+        ]
+      ]
+    },
+    {
+      "page_number": 9,
+      "text": "5 ecoinvent submission\n5.1 Spodumene production\nThe primary reference for this dataset is:\nKhakmardan, S., Crawford, R. H., Giurco, D., & Li, W. (2025). Constructing a life cycle inventory\nof Spodumene concentrate production: Greenbushes case, Western Australia. Journal of\nCleaner Production, 496, 145123. https://doi.org/10.1016/j.jclepro.2025.145123\nThis dataset represents the cradle-to-gate life cycle inventory for spodumene concentrate\n(SC6, ~6% Li₂O) produced at the Greenbushes operation in Western Australia for the year 2022.\nSystem Boundaries and Scope\nThe dataset covers the complete production chain from ore extraction to the processing plant\ngate, with spodumene concentrate as the reference product. The system boundaries include:\n• Mining operations: Open-pit mining with conventional drilling and blasting, overburden\nremoval and waste handling, ore loading and on-site haulage, and all auxiliary mine\noperations including mine infrastructure and land use\n• Beneficiation and processing: Crushing and screening, dense media separation using\nferrosilicon, grinding and classification, flotation using fatty acid collector and glycol-\nbased frother with pH modifiers, filtration and dewatering, and tailings management.\nThe functional unit is 1 kg of dewatered spodumene concentrate containing approximately 6%\nLi₂O. The dataset excludes downstream transport and chemical conversion processes.\nModelling choices in ecoinvent:\n1. The original paper excludes the tantalum byproduct from LCIA due to its negligible mass\nratio relative to SC6. In ecoinvent, economic allocation is applied for the tantalum\nconcentrate co-product (30% Ta₂O₅); however, given the minimal mass contribution,\nthe allocation factor remains negligible and results are comparable.\n2. Compared to the paper, three specific exchanges were approximated due to the\nunavailability of detailed equipment-specific data in the ecoinvent database and\nunavailability of enough data to recreate their inventories:\no “blasthole drilling by D65”, proxied with an addition of diesel for blasthole drilling\n(111MJ*0.000325 m = 0.036075MJ)\no “excavation by CAT 6015 excavator” proxied with “excavation, hydraulic digger”\no “haul by CAT 777 mining truck”, proxied with “transport, freight, lorry, >32 metric\nton, diesel, EUR 4”\n9",
+      "tables": []
+    },
+    {
+      "page_number": 10,
+      "text": "These three exchanges collectively would contribute approximately 6% (0.02 kg CO₂eq/kg\nspodumene concentrate) to the global warming potential. It is recommended to improve the\nrepresentation of these exchanges in future database updates and this is flagged in the\nIncludedActivityEnd field of the dataset.\nExchange flow for road use:\n“mining road” and “mining road maintenance” were created by the authors based on ecoinvent\n“road” and “road maintenance”. We have introduced them with the original ecoinvent names.\nMass balance\nThe mass balance for this dataset can be found in the Excel unit process balance (spodumene,\nundef).xlsx.\nIn the Excel document, it is possible to observe for each property whether there is a balance\nbetween the input and output, and which exchanges mostly contribute to it.\nIdeally, it is advisable to allow a maximum of 1% difference between input and output for each\nproperty, with 5% as a worst-case scenario. Therefore, it is required to carefully review the\nproperties where this limit is trespassed. Please note that wet mass = dry mass + water in wet\nmass\nMass balance key highlights:\n• Wet mass shows an imbalance of 0.43%, which we consider acceptable\n• Dry mass and water content in wet mass show an imbalance of 7.23% and 35.37%,\nrespectively. These imbalances were investigated: the imbalance is driven by the\ndefault ecoinvent properties automatically assigned to the exchange “non sulfidic\ntailing, off-site” (30% water). The paper does not report a specific tailings\ncomposition/water content. If the tailings were assumed to be dry, the balances would\nclose.\n• Lithium content in spodumene from ground: Lithium is imbalanced because the Li\ncontent is based on default ecoinvent properties for “spodumene from ground”. Action\npoint: We suggest balancing the lithium output via the properties of ‘spodumene from\nground’ to maintain elemental closure.\n• Other elements (Al, Si. O): we observe an imbalance because these elments are\npresent in ecoinvent’s default “spodumene from ground” properties but not reported\nfor the concentrate output. Action point: we propose either updating output\n‘spodumene concentrate’ properties or adding a note in the metadata.\n10",
+      "tables": []
+    },
+    {
+      "page_number": 11,
+      "text": "Scores\nThis section presents an estimation of the GWP100 score of the dataset. Please keep in mind\nthat these are indicative estimations based on v3.12 framework and that the final scores will be\naffected by next iterations in this project and updates in other areas of the database.\nScore in Khakmardan: 0.323 kg Co2 - Eq\nScore in ecoinvent: 0.320 kg CO2 - Eq\nPercentage contribution Percentage\nExchange name Khakmardan Exchange name ei\nKhakmardan contribution ei\nElectricity, medium voltage 39.22% electricity, medium 34.38%\nvoltage\nGrinding media (Chromium Steel) 20.53% steel, chromium 24.12%\nsteel 18/8\nDiesel 13.65% diesel, burned in 16.42%\nbuilding machine\nBlasting with explosives 6.58% blasting 6.54%\nGrinding media manufacturing 4.68% forging, steel 5.83%\n(Forging)\nOleic acid 4.33% fatty acid 2.66%\nTransport by mining truck 2.91% transport, freight, 2.34%\nlorry, >32 metric ton,\ndiesel, EURO 4\nBuilding (multi-storey) 2.27% building, multi- 2.61%\nstorey\nExcavation by mining excavator 1.71% excavation, 0.88%\nhydraulic digger\nOthers 4.12% Others 4.22%\nTOTAL 100% 100%\n11",
+      "tables": [
+        [
+          [
+            "Exchange name Khakmardan",
+            "",
+            "Percentage contribution",
+            "",
+            "Exchange name ei",
+            "",
+            "Percentage",
+            ""
+          ],
+          [
+            null,
+            null,
+            "Khakmardan",
+            null,
+            null,
+            null,
+            "contribution ei",
+            null
+          ],
+          [
+            null,
+            "39.22%",
+            null,
+            null,
+            "electricity, medium\nvoltage",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "20.53%",
+            null,
+            null,
+            "steel, chromium\nsteel 18/8",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "13.65%",
+            null,
+            null,
+            "diesel, burned in\nbuilding machine",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "6.58%",
+            null,
+            null,
+            "blasting",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "4.68%",
+            null,
+            null,
+            "forging, steel",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "4.33%",
+            null,
+            null,
+            "fatty acid",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "2.91%",
+            null,
+            null,
+            "transport, freight,\nlorry, >32 metric ton,\ndiesel, EURO 4",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "2.27%",
+            null,
+            null,
+            "building, multi-\nstorey",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "1.71%",
+            null,
+            null,
+            "excavation,\nhydraulic digger",
+            null,
+            null,
+            null
+          ],
+          [
+            null,
+            "4.12%",
+            null,
+            null,
+            "Others",
+            null,
+            null,
+            null
+          ]
+        ]
+      ]
+    },
+    {
+      "page_number": 12,
+      "text": "5.2 Lithium brine concentration and lithium carbonate,\nbattery grade production\nThis section presents the lithium brine concentration and lithium carbonate production\ndatasets for multiple salars. While site-specific details and considerations are discussed\nindividually for each salar, several methodological choices and data treatment approaches are\ncommon across all brine-based datasets. These shared elements are described below before\npresenting the individual salars’ datasets.\nData Source\nThe lithium brine concentration and lithium carbonate production datasets presented here are\nbased on the modeling work of Schenker & Pfister (2025), which represents an updated and\nexpanded version of earlier 2022 framework:\n• Schenker, V., & Pfister, S. (2025). Current and Future Impacts of Lithium Carbonate\nfrom Brines: A Global Regionalized Life Cycle Assessment Model. Environmental\nScience & Technology, 59(13), 6543-6555.\nThis 2025 publication builds upon and updates the methodology presented in:\n• Schenker, V., Oberschelp, C., & Pfister, S. (2022). Regionalized life cycle assessment of\npresent and future lithium production for Li-ion batteries. Resources, Conservation and\nRecycling, 187, 106611.\nScaling Methodology: Evaporation Ponds to Concentrated Brine\nSchenker & Pfister (2025) model the evaporation pond process as producing one functional unit\nper \"unit of evaporation pond\" or “unit of DLE evaporation ponds”, according to the site\noperation mode. To integrate these inventories into ecoinvent framework, we needed to scale\nthe evaporation pond inventories to the reference product \"concentrated lithium brine, x% Li\"\n(expressed per kg of concentrated brine).\nThis scaling is essential because the concentrated brine is the intermediate product that\nfeeds into lithium carbonate production.\nThe scaling approach uses the lithium mass balance between raw brine input and concentrated\nbrine output, along with site-specific lithium concentrations. Using Salar de Olaroz as an\nexample, with the data from Schenker & Pfister:\n• 1 unit of evaporation pond requires 0.02446 kg of lithium from the environment (raw\nbrine input)\n• 1 kg of lithium carbonate battery grade requires 0.348 kg of lithium from the\nenvironment (computing from the cradle-to-gate data reported in Schenker)\n• Therefore, 1 kg of lithium carbonate battery grade requires 14.25 units of evaporation\npond (calculated as 0.348 kg of Li per kg Li2CO3/ 0.02446 kg of Li per unit)\n12",
+      "tables": []
+    },
+    {
+      "page_number": 13,
+      "text": "• The raw lithium brine has a lithium concentration of 0.06% Li by weight according to\nSchenker & Pfister (2025), Sheet 'B.2_LCI - Input data'\n• The concentrated lithium brine has a lithium concentration of 1.20% Li by weight\naccording to Schenker & Pfister (2025), Sheet 'B.2_LCI - Input data'\nTo calculate the concentrated brine produced per evaporation pond unit:\n• 29 kg of concentrated brine per kg of lithium carbonate are required (calculated as\n0.348 kg of Li per kg Li2CO3 / 0.012 kg Li per kg conc. Li brine)\n• 2.04 kg of concentrated brine per pond unit are produced (calculated as 29 kg / 14.25\nunits of evaporation)\nResult: 2.04 kg of concentrated lithium brine (1.2% Li) are produced per 1 unit of evaporation\npond at Salar de Olaroz. Therefore, if we use the reference product \"lithium brine,\nconcentrated, 1.2% Li\", we need to divide the amount of each exchange in the inventory of\nSchenker and Pfister for the evaporation pond by a factor of 2.04 to express it per kg of\nconcentrated brine.\nThis scaling methodology was applied consistently across all datasets to ensure that\nevaporation pond inventories from Schenker & Pfister (2025) are correctly expressed per\nkg of concentrated brine, enabling proper integration with downstream lithium carbonate\nproduction processes.\nExchanges comments\nWe plan to improve the exchanges comments inside the ecoinvent datasets.\nWe had originally structured them to mention from which process step in the model of\nSchenker the amounts are taken from. However, we are now reconsidering this approach as we\nthink that only mentioning the process step of the model might not be the most straightforward\nway for users to grasp the role of each exchange. We plan to work on exchange comments\nimprovement during the first review round, we will then resubmit the datasets with these\nupdates during the second review round together with the addressing of the comments\nfrom the reviewer. We report here 2 examples of how we plan to work on the comments, from\nthe dataset ‘lithium brine concentration, Salar de Olaroz | AR’:\n1. Current comment to the exchange ‘sulfuric acid’: From Schenker & Pfister,\n2025. SI. Used in the process Water_Ola, df_evaporation_ponds. Scaled to 1 kg\nof concentrated lithium brine (2.04kg of concentrated lithium brine per kg of\nevaporation pond)\nTo implement comment to the exchange ‘sulfuric acid’: Sulfuric acid is used for\npH adjustment during brine processing in evaporation ponds to optimize lithium\nprecipitation and minimize magnesium co-precipitation. From Schenker &\nPfister, 2025. SI. Allocated to the process df_evaporation_ponds. Scaled to 1 kg\nof concentrated lithium brine (2.04 kg of concentrated lithium brine per kg of\nevaporation pond output).\n2. Current comment to the exchange ‘quicklime, milled, packed’: From Schenker &\nPfister, 2025. SI. Used in the process df_evaporation_ponds. Scaled to 1 kg of\nconcentrated lithium brine (2.04kg of concentrated lithium brine per kg of\n13",
+      "tables": [
+        [
+          [
+            "29 kg of concentrated brine per kg of lithium carbonate"
+          ],
+          [
+            "0.348 kg"
+          ]
+        ]
+      ]
+    },
+    {
+      "page_number": 14,
+      "text": "evaporation pond)\nTo implement comment to the exchange ‘quicklime, milled, packed’ ‘:\nQuicklime (CaO) is used in the brine concentration stage (evaporation pond\nsystem / associated brine treatment) to precipitate and remove dissolved\nimpurities (e.g. Mg) from the brine prior to downstream processing. Amount\nbased on Schenker & Pfister (2025) Supplementary Information, where it is\nmodelled as an input to df_evaporation_ponds. Scaled for this dataset to 1 kg\nconcentrated lithium brine, using the factor 2.04 kg concentrated brine per 1 kg\nevaporation pond output.\nSoda ash\nThis section addresses a general specification issue regarding soda ash.\nA discrepancy exists across literature sources regarding whether \"soda ash, light\" or \"soda ash,\ndense\" is used. Schenker & Pfister (2025) explicitly uses \"soda ash, light\". Kelly et al. (2021)\nreport \"soda ash\" generically (Table S.6 and S.7, Supplementary Information) without specifying\nlight or dense, but Chordia et al. (2022) explicitly map this to \"soda ash, dense\".\nA soda ash study from the Argentinian government indicates that natural soda ash is\npredominantly used for large-volume industrial applications, such as chemical precipitation\nand mineral processing, and is associated with lower energy use and CO₂ emissions than\nsynthetic soda ash; however, as ecoinvent does not currently provide an explicit dataset for\nnatural soda ash, the background system necessarily relies on synthetic soda ash.\nAll ecoinvent datasets currently use \"soda ash, dense\". Action point We seek the reviewer's\nadvice on the most appropriate choice between \"soda ash, light” and \"soda ash, dense’’. This\nspecification has a substantial impact on the IPCC 2021 GWP100 scores (climate change:\ntotal, excl. biogenic CO₂), as the two soda ash types have significantly different emission\nfactors in ecoinvent. The influence of this choice on the carbon footprint can be observed in the\nGWP100 scores presented in the following sections.\nPlease note that also for the spodumene dataset the exchange ‘soda ash, dense’ was selected,\nas also Khakmardan does not specify further the type of soda ash. The effect in spodumene is\nsmaller, as reported in the Scores section of the spodumene dataset.\n14",
+      "tables": []
+    },
+    {
+      "page_number": 15,
+      "text": "5.2.1 Sites overview\nThis section presents an overview of the sites covered together with estimation of the GWP100\nscore of each dataset. Please keep in mind that these are estimations based on v3.12\nframework and that the final scores will be affected by next iterations in this project and\nupdates in other areas of the database.\n5.2.1.1 Chaerhan,CN\nProcess Overview and Dataset Boundaries\nThe Chaerhan lithium production route follows a DLE-based process sequence as illustrated\nbelow from Schenker & Pfister (2025). The complete production chain includes:\n1. Evaporation ponds/pumping\n2. Li-ion selective adsorption (DLE)\n3. Ion exchanger (low water)\n4. Nanofiltration\n5. Reverse osmosis\n6. DLE evaporation ponds\n7. Li₂CO₃ precipitation (TG)\n8. Centrifuge Li₂CO₃ (TG) / Washing Li₂CO₃ (TG)\n9. Dissolution\n10. Li₂CO₃ precipitation (BG)\n11. Centrifuge Li₂CO₃ (BG) / Washing Li₂CO₃ (BG)\n12. Centrifuge washing\n13. Rotary dryer\nDataset boundary definition:\n• ecoinvent lithium brine concentration dataset (CN) covers steps 1-6 in the process\nsequence (evaporation ponds/pumping through DLE evaporation ponds), producing\nconcentrated lithium brine at 0.022% Li as the reference product. This represents the\nupstream brine enrichment and concentration processes.\n• ecoinvent lithium carbonate production dataset (CN) begins at step 7 and covers\nall downstream processing (Li₂CO₃ precipitation through rotary dryer), using the\n15",
+      "tables": []
+    },
+    {
+      "page_number": 16,
+      "text": "concentrated brine (0.022% Li) as input and producing battery-grade Li₂CO₃ as the\nreference product.\nGeography: Chaerhan (Qarhan) salt lake, Qinghai Province, China. Feed brine is reported\nas brine/pulp from a K-fertilizer plant, with Li concentration 0.25–0.6 g/L.<\nTime period: Current operation representative for the early-2020s\nTechnology:\n• DLE-type brine concentration route using Li-ion selective adsorption with adsorption\nand desorption phases (with heating), followed by downstream volume-\nreduction/purification through ion exchange and membrane filtration (nanofiltration +\nreverse osmosis). In the Schenker & Pfister 2025 framework, Chaerhan is highlighted\nas a special DLE case relying mainly on volume reduction and not reporting a\nseparate pretreatment phase before the DLE column (unlike other DLE sites).\nOutput: Concentrated lithium brine, 0.022% Li\n• Battery-grade production is modeled with the brine-to-Li₂CO₃ processing structure\nshown above from Schenker & Pfister (2025). CO₂ is largely recycled within the\nupgrading loop as described in the Schenker & Pfister (2025) model documentation.\nEnergy and material calculations follow the Schenker & Pfister (2025) Supplementary\nInformation process modules.\nOutput: Battery-grade Li₂CO₃\nGWP100 Score (IPCC 2021)\nNo score estimation for the brine is reported in Schenker & Pfister 2025.\nei score estimation ‘lithium brine concentration | CN’: 0.0314 kg CO2-Eq\n16",
+      "tables": []
+    },
+    {
+      "page_number": 17,
+      "text": "Schenker & Pfister 2025 report for the lithium carbonate battery grade as: 39.1 kg CO2-Eq\nei score estimation ‘lithium carbonate production, battery grade | CN’: 39.7 kg CO2-Eq*\n*Please refer to the direct contributions lithium.xlsx file for soda ash effect analysis.\n17",
+      "tables": []
+    },
+    {
+      "page_number": 18,
+      "text": "5.2.1.2 Salar de Olaroz, AR\nProcess Overview and Dataset Boundaries\nThe Salar de Olaroz lithium production route follows a conventional evaporation pond\nconcentration followed by intensive purification and upgrading sequence, as illustrated in in\nthe flowchart below from Schenker & Pfister (2025). The complete production chain includes:\n1. Evaporation ponds/pumping\n2. Centrifuge (general)\n3. Li₂CO₃ precipitation (TG)\n4. Washing Li₂CO₃ (TG)\n5. Centrifuge Li₂CO₃ (TG)\n6. Dissolution\n7. Centrifuge (general)\n8. Ion exchanger (high water) - First purification stage\n9. Ion exchanger (high water) - Ca/Mg removal\n10. Ion exchanger (low water) - boron removal\n11. Li₂CO₃ precipitation (BG)\n12. Centrifuge Li₂CO₃ (BG)\n13. Washing Li₂CO₃ (BG)\n14. Centrifuge washing\n15. Rotary dryer\nDataset boundary definition:\n• ecoinvent lithium brine concentration, Salar de Olaroz dataset (AR) covers step 1\nin the process sequence (evaporation ponds/pumping with quicklime addition for\nMg/Ca removal), producing concentrated lithium brine at 1.2% Li as the reference\nproduct. The process includes volume reduction in evaporation ponds and\nacidification using sulfuric acid for pH adjustment.\n• ecoinvent lithium carbonate production, battery grade, from concentrated brine,\nSalar de Olaroz dataset (AR) begins at step 2 and covers all downstream\nprocessing (Li₂CO₃ precipitation through rotary dryer), using the concentrated brine\n(1.2% Li) as input and producing battery-grade Li₂CO₃ as the reference product. This\nstage includes the intensive ion exchanger treatment (steps 8-10) that characterizes\nOlaroz operations.\n18",
+      "tables": []
+    },
+    {
+      "page_number": 19,
+      "text": "Geography: Salar de Olaroz, Argentina\nTime period: Dataset represents operations from 2011-2019, with time validity set to 2019\nto reflect the key operational reporting year used for Olaroz assumptions.\nTechnology:\n• Conventional salar concentration via evaporation ponds. Brine is pumped from 50 m\nbelow ground and concentrated by solar evaporation to ~1.2 wt% Li. The process\nincludes volume reduction in evaporation ponds with quicklime addition for\nmagnesium and calcium removal, followed by acidification using sulfuric acid for pH\nadjustment and centrifugation for solid-liquid separation.\nOutput: Concentrated lithium brine, 1.2% Li\n• Conventional brine-route upgrading to battery grade via two-stage\nprecipitation/upgrading. Technical-grade Li₂CO₃ is precipitated with soda ash\n(modeled stoichiometrically with surplus to account for losses in Schenker & Pfister),\nfollowed by washing and centrifugation. The technical-grade Li₂CO₃ is then dissolved\nat low temperature with CO₂ to improve dissolution. Before battery-grade\nprecipitation, the solution undergoes intensive purification through ion exchangers.\nThe intensive purification through three ion exchangers during the carbonate\nproduction stage is an Olaroz-specific process characteristic: two for Ca/Mg removal\n(high water) and one for boron removal (low water).\nBattery-grade Li₂CO₃ is then precipitated with CO₂ recirculation, followed by\ncentrifugation, washing, and drying (rotary dryer).\nOutput: Battery-grade Li₂CO₃\nComplementary information:\nFrom direct communication with the authors, we know that the model for Olaroz is very\nlikely underestimating salt tailings (which are reported at 9.9e-17 kg of salt tailings at the\nevaporation pond). This is due to lack of reported enriched brine chemistry in the\nevaporation ponds at the site. As a result, the reported values for salt tailings in the\npublication are too and should not be considered confirmed. ecoinvent dataset does not\ninclude salt tailings.\n19",
+      "tables": []
+    },
+    {
+      "page_number": 20,
+      "text": "GWP100 Score (IPCC 2021)\nNo score estimation for the brine is reported in Schenker & Pfister 2025.\nei score estimation ‘lithium brine concentration, Salar de Olaroz | AR: 0.179 kg CO2-Eq\nSchenker & Pfister 2025 report for the lithium carbonate battery grade as: 7.2 kg CO2-Eq\nei score estimation ‘lithium carbonate production, battery grade, from concentrated brine,\nSalar de Olaroz | AR: 9.044 kg CO2-Eq\n*Please refer to the direct contributions lithium.xlsx file for soda ash effect analysis.\n20",
+      "tables": []
+    },
+    {
+      "page_number": 21,
+      "text": "5.2.1.3 Fenix, AR\nProcess Overview and Dataset Boundaries\nThe Fenix lithium production route follows a DLE-based concentration with evaporation pond\npre-treatment as illustrated in the flowchart below from Schenker & Pfister (2025). The\ncomplete production chain includes:\n1. Evaporation ponds/pumping\n2. Mg and Ca removal by soda ash\n3. Acidification\n4. Li-ion selective adsorption (DLE)\n5. Mechanical evaporator\n6. Ion exchanger (low water)\n7. DLE evaporation ponds\n8. Li₂CO₃ precipitation (TG)\n9. Centrifuge Li₂CO₃ (TG)\n10. Washing Li₂CO₃ (TG)\n11. Dissolution\n12. Li₂CO₃ precipitation (BG)\n13. Centrifuge Li₂CO₃ (BG)\n14. Washing Li₂CO₃ (BG)\n15. Centrifuge washing\n16. Rotary dryer\nDataset boundary definition:\n• ecoinvent lithium brine concentration, Fenix dataset (AR) covers steps 1-7 in the\nprocess sequence (evaporation ponds/pumping through ion exchanger for low-water\npurification), producing concentrated lithium brine at 0.7% Li as the reference product.\nThis represents the upstream brine enrichment through DLE extraction and purification.\n• ecoinvent lithium carbonate production, battery grade, from concentrated brine,\nFenix dataset (AR) begins at step 8 and covers all downstream processing (Li₂CO₃\nprecipitation through rotary dryer), using the concentrated brine (0.7% Li) as input and\nproducing battery-grade Li₂CO₃ as the reference product.\nGeography: Fenix brine operation at Salar del Hombre Muerto, Argentina. Direct lithium\nextraction (ion-exchanger/resin adsorption) route as described in Schenker et al. (2022) SI\nas an example of site-specific technology used by Livent.\nTime period: Current operations around 2022 as modeled in Schenker & Pfister (2025)\nTechnology characterization:\n21",
+      "tables": []
+    },
+    {
+      "page_number": 22,
+      "text": "• Fenix follows a DLE-based concentration route that combines conventional\nevaporation ponds with advanced DLE technology. The process sequence includes\ninitial solar evaporation for volume reduction, followed by chemical pre-treatment\n(soda ash for Mg/Ca removal), DLE Li-selective adsorption for efficient lithium\nextraction, mechanical evaporation for further concentration, and ion exchange for\nfinal purification. This hybrid approach distinguishes Fenix from purely conventional\nevaporation pond operations (like Olaroz and Silver Peak) and from DLE operations\nwithout evaporation pond pre-treatment (like Chaerhan).\nOutput: Concentrated lithium brine, 0.07%Li\n• Brine-route production of battery-grade Li₂CO₃ following the Schenker & Pfister\n(2025) modeling framework. CO₂ recirculation is modeled as described in the\nSupplementary Information of Schenker & Pfister; heat losses are represented as\nwaste heat where applicable.\nOutput: Battery-grade Li₂CO₃\nComplementary notes:\nDLE evaporation ponds data gap: From direct communication with the authors, the DLE\nevaporation pond component is not fully inventoried in the current model for Fenix and other\nDLE sites. While these facilities employ DLE technologies with evaporation ponds in the\nprocessing scheme, insufficient data exist to quantify pond sizing, salt crystallization\nprocesses, and associated land occupation and transformation. As a result, the Fenix\ninventory in the 2025 SI lacks occupation, transformation, and salt tailing exchanges. The\nauthors note that recent technical documentation from Arcadium/Livent may enable future\nestimation of these evaporation pond parameters, representing a potential improvement\narea for future model iterations.\nGWP100 Score (IPCC 2021):\nNo score estimation for the brine is reported in Schenker & Pfister 2025.\nei score estimation ‘lithium brine concentration, Fenix | AR: 0.0397 kg CO2-Eq\n22",
+      "tables": []
+    },
+    {
+      "page_number": 23,
+      "text": "Schenker & Pfister 2025 report for the lithium carbonate battery grade as: 29.6 kg CO2-Eq\necoinvent score estimation ‘lithium carbonate production, battery grade, from concentrated\nbrine, Fenix | AR: 36.5 kg CO2-Eq\n*Please refer to the direct contributions lithium.xlsx file for soda ash effect analysis.\n23",
+      "tables": []
+    },
+    {
+      "page_number": 24,
+      "text": "5.2.1.4 Silver Peak\nProcess Overview and Dataset Boundaries\nThe Silver Peak lithium production route follows a conventional evaporation pond\nconcentration with ion exchanger upgrading, as illustrated in the flowchart below from\nSchenker & Pfister (2025). The complete production chain includes:\n1. Evaporation ponds/pumping\n2. Centrifuge (general)\n3. Li₂CO₃ precipitation (TG)\n4. Washing Li₂CO₃ (TG)\n5. Centrifuge Li₂CO₃ (TG)\n6. Dissolution\n7. Centrifuge (general)\n8. Ion exchanger (high water)\n9. Ion exchanger (high water)\n10. Ion exchanger (low water)\n11. Li₂CO₃ precipitation (BG)\n12. Centrifuge Li₂CO₃ (BG)\n13. Washing Li₂CO₃ (BG)\n14. Centrifuge washing\n15. Rotary dryer\nDataset boundary definition:\n• ecoinvent lithium brine concentration dataset (US) covers step 1 in the process\nsequence (evaporation ponds/pumping with quicklime addition for impurity removal),\nproducing concentrated lithium brine at 0.6% Li as the reference product. Raw brine\nis pumped to surface and concentrated in a pond cascade through solar evaporation.\n• ecoinvent lithium carbonate production, battery grade, from concentrated brine\ndataset (US) begins at step 2 and covers all downstream processing (centrifuge\nthrough rotary dryer), using the concentrated brine (0.6% Li) as input and producing\nbattery-grade Li₂CO₃ as the reference product. This stage includes the three ion\nexchanger purification steps (steps 8-10) that characterize the Silver Peak ion-\nexchanger route.\nGeography: Silver Peak (Clayton Valley), Nevada, United States\n24",
+      "tables": []
+    },
+    {
+      "page_number": 25,
+      "text": "Time period: Current operations as compiled in Schenker & Pfister (2025), dates set to\n2022\nTechnology characterization:\n• Silver Peak follows a conventional salar concentration route via evaporation ponds\nwith solar energy as the primary driver for water evaporation. Raw brine is pumped to\nsurface and concentrated in a pond cascade to 0.6% Li, with quicklime used for\nimpurity removal during the evaporation stage.\nOutput: lithium brine 0.6%\n• The downstream processing is characterized by a conventional ion-exchanger route\nwith three ion exchange purification stages before battery-grade precipitation.\nOutput: Battery-grade Li₂CO₃\nGWP100 Score (IPCC 2021):\nNo score estimation for the brine is reported in Schenker & Pfister 2025.\nei score estimation ‘lithium brine concentration, | US: 0.051 kg CO2-Eq\n25",
+      "tables": []
+    },
+    {
+      "page_number": 26,
+      "text": "Schenker & Pfister 2025 report for the lithium carbonate battery grade as: 2.8 kg CO2-Eq\necoinvent score estimation ‘lithium carbonate production, battery grade, from concentrated\nbrine | US : 4.47 kg CO2-Eq *\n*Please refer to the direct contributions lithium.xlsx file for soda ash effect analysis.\n5.2.2 Mass balance in lithium brine concentration datasets\nA document in support of the mass balance analysis has been shared with this report unit\nprocess balance (brine concentration, undef).xlsx.\nIn the Excel document, it is possible to observe for each property whether there is a balance\nbetween the input and output, and which exchanges mostly contribute to it.\nThe Excel shows 1 sheet for each site.\nAn important methodological consideration affects the interpretation of these mass balances.\nThe source literature (Schenker & Pfister, 2025) follows the AWARE methodology for water\nscarcity assessment, as recommended by the UNEP-SETAC Life Cycle Initiative. This\nmethodology specifically excludes saline brine water from water consumption accounting,\nfocusing only on freshwater consumption.\nAs stated in Schenker & Pfister (2025, p. E): \"Kelly et al., Chordia et al., and Schenker et al.\ndo not include the water content of the brine in their assessments when assessing water\nscarcity. As AWARE is designed to only assess freshwater consumption, we follow the\napproach defined by the UNEP-SETAC Life Cycle Initiative.\"\nA complete mass balance for lithium brine concentration should account for:\n26",
+      "tables": []
+    },
+    {
+      "page_number": 27,
+      "text": "Inputs:\n• Raw lithium brine (with specified water content and dissolved mineral composition)\n• Freshwater (for washing, dust suppression, or dilution)\n• Process chemicals (acids, bases, flocculants as applicable)\nOutputs:\n• Concentrated lithium brine (with specified water content and mineral composition)\n• Evaporated water\n• Precipitated salt tailings (primarily NaCl, but also K, Mg, Ca, and sulfate salts)\nCurrent data gaps affecting mass balance\nBeyond the exclusion of brine water from water consumption accounting, additional data\ngaps contribute to the incomplete mass balance in these datasets:\nMissing mineral extraction flows: Because the brine water itself is not reported as an input\nflow (consistent with AWARE), the dissolved minerals carried in that brine water are also not\nexplicitly reported as extractions from ground.\nIncomplete salt tailings reporting: As communicated by the dataset authors, salt tailings\ndata is incomplete or missing in the current datasets.\nPlanned actions on the ecoinvent side\nTo address the identified mass balance issues while respecting the methodological choices\nin the source literature, we plan to implement the following improvements:\n1. Include lithium brine composition in the reference product\nAt the moment, we included in the Reference Product properties only the lithium content.\nWe will incorporate the brine composition data (water content and dissolved mineral\nconcentrations) as properties of the concentrated lithium brine reference product, based on\nthe data available in Schenker & Pfister (2025), Sheet 'B.2_LCI - Input data'.\nThis will provide users with transparent information about the actual composition of the\noutput brine. In particular, the water content will be accounted for.\nAction point: Brine composition data is not available for all sites in the Schenker dataset.\nFor sites where composition data is missing (Olaroz, Silver Peak and Fenix), we seek editor\nadvice on selecting an appropriate proxy for brine composition when missing. The\nsheet 'B.2_LCI - Input data' has been reported in the attached Excel unit process balance\n(brine concentration, undef).xlsx.\n2. Document methodology and data gaps\nWe propose to clearly document in the dataset metadata:\n• The application of the AWARE methodology for water accounting, which deliberately\nexcludes saline brine water from water consumption metrics\n• The current data gaps regarding precipitated salts and complete water balance\n27",
+      "tables": []
+    },
+    {
+      "page_number": 28,
+      "text": "This transparent documentation will help LCA practitioners understand the limitations of\nthese datasets.\n3. Parallel improvements for current or future releases\nIn parallel with the above actions, we will continue working on the following aspects, either\nduring this release or in subsequent updates:\n• New biosphere flows: Consider introducing a new elementary flow such as \"water,\nbrine, from ground\" to distinguish ancient saline brine water from freshwater\nextraction, allowing for complete water accounting while maintaining compatibility\nwith AWARE methodology\n• Salt tailings data: Work to fill the data gaps on precipitated salts, potentially by\nreaching out to the dataset authors (Schenker & Pfister) for clarification on additional\ncalculations or proxy data\n• Complete mineral balance: Develop a more comprehensive approach to tracking all\ndissolved minerals extracted with the brine and their fate during the concentration\nprocess\nThese parallel improvements would enhance the datasets' utility for a broader range of LCA\napplications while maintaining their validity for water scarcity assessment under AWARE\nguidelines.\n5.2.3 Mass balance in lithium carbonate, battery grade datasets\nA document in support of the mass balance analysis has been shared with this report: unit\nprocess balance (Li2CO3, undef).xlsx.\nThe mass balance framework described in section 5.2.2 for lithium brine concentration\ndatasets applies similarly to lithium carbonate production datasets. The same\nmethodological considerations regarding AWARE methodology, water accounting, and data\ngaps are relevant here.\n28",
+      "tables": []
+    }
+  ]
+}
