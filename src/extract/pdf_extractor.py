@@ -3,7 +3,7 @@
 import pdfplumber
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # ---- CONFIG ----
@@ -19,7 +19,7 @@ def extract_pdf(pdf_path: str) -> dict:
     pdf_path = Path(pdf_path)
     result = {
         "source_file": pdf_path.name,
-        "extracted_at": datetime.utcnow().isoformat(),
+        "extracted_at": datetime.now(timezone.utc).isoformat(),
         "pages": []
     }
 
@@ -38,17 +38,20 @@ def extract_pdf(pdf_path: str) -> dict:
 def save_bronze_record(record: dict, original_filename: str):
     """
     Saves the extracted raw record as JSON into the bronze layer.
-    Filename pattern: <original_name>_<timestamp>.json
+    Filename is based on the source filename only (no timestamp) so that
+    re-running extraction overwrites the existing record instead of creating
+    duplicates — this makes the extraction step idempotent.
     """
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    #timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")   #Removing this line as it was creating the idempotent bug
     base_name = Path(original_filename).stem
-    out_path = BRONZE_DIR / f"{base_name}_{timestamp}.json"
+    out_path = BRONZE_DIR / f"{base_name}.json"
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(record, f, indent=2, ensure_ascii=False)
 
     print(f"[OK] Saved bronze record -> {out_path}")
     return out_path
+
 
 
 if __name__ == "__main__":

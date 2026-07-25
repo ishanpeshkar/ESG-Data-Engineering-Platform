@@ -303,4 +303,58 @@ task ordering, retry logic, and full execution/log history per run.
 
 **Status: Phase 3 core orchestration — Done.**
 
+## Phase 3 — COMPLETE ✅
+
+Summary: Set up WSL2 + Docker Desktop, initialized Apache Airflow via Docker Compose,
+mounted project code into containers, built a DAG (`esg_data_pipeline`) wiring the full
+Phase 1+2 pipeline (extract_pdf -> clean_pdf -> validate_pdf -> build_gold_layer) as a
+single orchestrated flow with enforced task dependencies and retry logic. Fixed one
+real bug (stray typo) surfaced during first DAG execution. Verified full pipeline runs
+successfully end-to-end, output matching manual execution results.
+
+Committed with message: "feat: orchestrate ESG pipeline with Airflow (Phase 3)"
+
+
+
+## Phase 4 — Dashboard
+
+### Step 4.1 — Install Streamlit
+Commands run:
+```bash
+pip install streamlit
+streamlit hello
+```
+- Installed cleanly, `streamlit hello` opened the built-in demo app in browser at
+  http://localhost:8501, confirming install worked correctly
+- **Status:** Done
+
+### Step 4.2 — Build Dashboard + Idempotency Bug Discovered
+- Built `src/dashboard/app.py` using Streamlit — reads gold_valid_records and
+  gold_flagged_records from DuckDB, shows summary metrics (total/valid/flagged/pass rate),
+  and tabbed views with a flag-reason filter
+- Ran successfully, dashboard rendered correctly
+
+**Bug discovered:** dashboard showed 24 total documents instead of the expected 8.
+**Root cause:** `pdf_extractor.py` saved bronze JSON files with a timestamp in the
+filename, so every pipeline run (including repeated Airflow DAG triggers) created NEW
+files instead of overwriting existing ones — silver/gold layers then processed
+duplicated bronze records across multiple runs.
+**Concept:** lack of **idempotency** — re-running the pipeline did not produce the same
+result as running it once, a real and common data engineering issue (especially relevant
+for scheduled/repeated pipeline runs, where bronze data would grow unbounded with
+duplicates over time).
+
+**Fix attempt 1:** removed timestamp from bronze filename — but left a stray reference
+to the old `timestamp` variable in `out_path`, causing `NameError: name 'timestamp' is
+not defined`.
+**Fix attempt 2 (final):** corrected `save_bronze_record()` fully to build the output
+path from the source filename only. Also fixed an unrelated `datetime.utcnow()`
+deprecation warning by switching to `datetime.now(timezone.utc)`.
+
+Verified fix: cleared bronze folder, re-ran full pipeline, dashboard confirmed back to
+correct 8 total documents (0 valid, 8 flagged) — idempotency restored.
+
+**Phase 4 status: COMPLETE.**
+
+- **Status:** Done (post-fix)
 *(to be filled in as we go)*
