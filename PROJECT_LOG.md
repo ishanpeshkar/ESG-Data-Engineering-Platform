@@ -356,5 +356,45 @@ correct 8 total documents (0 valid, 8 flagged) — idempotency restored.
 
 **Phase 4 status: COMPLETE.**
 
-- **Status:** Done (post-fix)
+
+## Phase 5 — AI-powered ESG Q&A (RAG)
+
+### Decision: LLM Provider
+Considered a paid API (OpenAI/Anthropic) vs fully local (Ollama) vs Groq.
+**Chose Groq** — free tier, fast inference, hosts strong open-weight models (Llama family)
+via an OpenAI-compatible API, keeping the project fully cost-free while avoiding the
+hardware/setup overhead of running models locally via Ollama.
+
+
+### Incident — Docker Desktop Container/Volume Wipe
+- Opened Docker Desktop and found all containers and volumes gone (unclear root cause —
+  suspected Docker Desktop update or reset). Confirmed via `docker ps -a` (empty) and
+  `docker volume ls` (empty).
+- **Reassurance/learning:** project logic was NOT lost — docker-compose.yaml, .env, and
+  the DAG file all live on the actual filesystem (mounted volumes), not inside Docker's
+  internal storage. Only lost: Airflow's run history and default admin login.
+- **Fix:** re-ran `docker compose up airflow-init` (re-pulled images, ~400MB, recreated
+  Postgres metadata DB and admin user) then `docker compose up -d`. Confirmed containers
+  running via `docker ps` (scheduler, webserver, worker, triggerer, postgres, redis all up).
+- **Status:** Recovered (webserver took ~1-2 min after startup to pass health checks
+  before UI became accessible — normal startup behavior, not a bug)
+
+### Step 5.1 — Groq API Setup + Test Call
+- Installed Groq SDK: `pip install groq`
+- Created `.env` in project root with `GROQ_API_KEY` (excluded from git via existing
+  .gitignore)
+- Built `src/rag/test_groq_connection.py` — simple test call using
+  `llama-3.3-70b-versatile` model
+- Ran successfully, received a correct, coherent one-sentence answer about EPDs
+- Confirms Groq API key, SDK, and connectivity all working end-to-end
+- **Status:** Done
+
+- Airflow UI confirmed accessible again at http://localhost:8080. Re-triggered
+  `esg_data_pipeline` DAG — all 4 tasks (extract_pdf, clean_pdf, validate_pdf,
+  build_gold_layer) completed successfully.
+- **Docker incident fully resolved.**
+
+5.2 to be started
+
+
 *(to be filled in as we go)*
