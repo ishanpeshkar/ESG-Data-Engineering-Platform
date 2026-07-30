@@ -356,5 +356,142 @@ correct 8 total documents (0 valid, 8 flagged) — idempotency restored.
 
 **Phase 4 status: COMPLETE.**
 
-- **Status:** Done (post-fix)
+
+## Phase 5 — AI-powered ESG Q&A (RAG)
+
+### Decision: LLM Provider
+Considered a paid API (OpenAI/Anthropic) vs fully local (Ollama) vs Groq.
+**Chose Groq** — free tier, fast inference, hosts strong open-weight models (Llama family)
+via an OpenAI-compatible API, keeping the project fully cost-free while avoiding the
+hardware/setup overhead of running models locally via Ollama.
+
+
+### Incident — Docker Desktop Container/Volume Wipe
+- Opened Docker Desktop and found all containers and volumes gone (unclear root cause —
+  suspected Docker Desktop update or reset). Confirmed via `docker ps -a` (empty) and
+  `docker volume ls` (empty).
+- **Reassurance/learning:** project logic was NOT lost — docker-compose.yaml, .env, and
+  the DAG file all live on the actual filesystem (mounted volumes), not inside Docker's
+  internal storage. Only lost: Airflow's run history and default admin login.
+- **Fix:** re-ran `docker compose up airflow-init` (re-pulled images, ~400MB, recreated
+  Postgres metadata DB and admin user) then `docker compose up -d`. Confirmed containers
+  running via `docker ps` (scheduler, webserver, worker, triggerer, postgres, redis all up).
+- **Status:** Recovered (webserver took ~1-2 min after startup to pass health checks
+  before UI became accessible — normal startup behavior, not a bug)
+
+### Step 5.1 — Groq API Setup + Test Call
+- Installed Groq SDK: `pip install groq`
+- Created `.env` in project root with `GROQ_API_KEY` (excluded from git via existing
+  .gitignore)
+- Built `src/rag/test_groq_connection.py` — simple test call using
+  `llama-3.3-70b-versatile` model
+- Ran successfully, received a correct, coherent one-sentence answer about EPDs
+- Confirms Groq API key, SDK, and connectivity all working end-to-end
+- **Status:** Done
+
+- Airflow UI confirmed accessible again at http://localhost:8080. Re-triggered
+  `esg_data_pipeline` DAG — all 4 tasks (extract_pdf, clean_pdf, validate_pdf,
+  build_gold_layer) completed successfully.
+- **Docker incident fully resolved.**
+
+### Step 5.2.1 — Install Embedding/Vector Store Dependencies
+- Ran `pip install sentence-transformers chromadb`
+- **Error hit:** `OSError: [WinError 206] The filename or extension is too long` while
+  installing `torch` (a dependency of sentence-transformers) — caused by Windows' default
+  260-character MAX_PATH limit being exceeded by deeply nested folders inside the torch
+  package, combined with an already-long project path.
+- **Fix (no restart required):** used `subst X: "<full project path>"` to map a short
+  virtual drive letter to the project folder, shortening effective paths underneath it
+  below the 260-char limit. Re-ran install from `X:\` — succeeded.
+- **Note:** `subst` mapping only persists until the PC restarts — needs to be re-run each
+  fresh session (added reminder to `START_HERE.md`).
+- **Status:** Done
+
+### Step 5.2.2 — Chunking + Embedding (Vector Store)
+- Built `src/rag/build_vector_store.py`:
+  - Loads bronze PDF JSON records
+  - Chunks page text by character count (800 chars, 150 overlap) to preserve context
+    across chunk boundaries
+  - Embeds chunks using `all-MiniLM-L6-v2` (free, local, ~80MB, sentence-transformers)
+  - Stores embeddings + text + metadata (source_file, page_number) in a persistent
+    ChromaDB collection (`esg_documents`)
+  - Collection is deleted and recreated on each run for idempotency (same lesson as
+    the bronze/gold layer duplication bug earlier)
+- Ran successfully: 8 bronze PDF records -> 849 chunks -> all embedded and stored
+- Minor Windows-only warning about symlink support in HuggingFace cache — cosmetic,
+  no functional impact (would just save disk space if enabled via Developer Mode)
+- **Status:** Done
+
+### Step 5.3 — Retrieval + Groq Q&A (First Working RAG Query)
+- Built `src/rag/ask_esg.py`:
+  - Embeds the user's question with the same model used for chunks (all-MiniLM-L6-v2)
+  - Retrieves top-5 most similar chunks from ChromaDB (`esg_documents` collection)
+  - Builds a grounded prompt instructing the LLM to answer ONLY from retrieved context
+    and to cite sources, avoiding hallucination
+  - Sends prompt to Groq (llama-3.3-70b-versatile) for final answer generation
+  - Prints answer + retrieved source files/pages for transparency
+
+**Test query:** "What standards are referenced in these EPD documents?"
+**Result:** Correctly identified EN 15804, International EPD System General Programme
+Instructions v5.0, and PCR 2019:14 — all grounded in actual retrieved chunks with correct
+source file + page number citations. Multiple standards synthesized from different
+documents in one coherent answer.
+
+**Milestone:** first fully working end-to-end RAG query. This is a clear, demonstrable
+upgrade over the naive regex-based `standard_reference` field from Phase 1 — where regex
+could only catch a single rigid pattern per document, the RAG system retrieves and
+synthesizes information contextually across multiple documents and phrasings, directly
+validating the reasoning we documented back in Phase 1 for why LLM-based extraction/
+retrieval outperforms keyword matching on real-world document variance.
+
+- **Status:** Done
+
+
+### Step 5.4 — Interactive Q&A in Dashboard
+- Added a "💬 Ask a Question" tab to `src/dashboard/app.py`, reusing the same
+  embedding model, ChromaDB collection, and Groq client from `ask_esg.py`
+  (cached via `st.cache_resource` so models/clients load once, not per interaction)
+- Added a text input + "Ask" button, displaying the generated answer and retrieved
+  source documents/pages directly in the dashboard
+
+**Test query:** "what is the epd and esg relation and how does brsr fits into it?"
+**Result:** Retrieved chunks from both an EPD document and the BRSR report (cross-source
+retrieval working correctly). The model explicitly noted that the provided context did
+not directly state the EPD-ESG relationship, then reasoned carefully from what it did
+retrieve to construct an accurate, well-cited answer (EPD as a specific environmental
+sub-report, BRSR as the broader ESG-attribute report) — demonstrating appropriate
+epistemic honesty rather than hallucinating a confident but ungrounded answer.
+
+**Status:** Done. Phase 5 core (retrieval + generation + interactive UI) fully working.
+
+
+### Step 5.5 — Edge Case Testing (Out-of-Scope Questions)
+
+Tested the system's behavior when asked questions with no real answer in the ingested
+documents, to verify it doesn't hallucinate using the underlying LLM's general training
+knowledge.
+
+**Test 1:** "What is the carbon footprint of Apple's iPhone 15 supply chain?"
+**Result:** Correctly identified that the context only covered TCS's sustainability
+report and an unrelated life cycle assessment document, explicitly stated Apple/iPhone
+15 was not mentioned, and did not fabricate an answer.
+
+**Test 2:** "What is the current stock price of Tesla?"
+**Result:** Correctly identified the context was unrelated (TCS reporting/sustainability
+documents), explicitly stated Tesla was not mentioned, and did not fabricate a stock
+price.
+
+**Key insight:** the vector retriever always returns its top-K nearest chunks regardless
+of true relevance (cosine similarity has no built-in "nothing matches" threshold) — so
+in both tests, *irrelevant* chunks were still retrieved. The critical safeguard is the
+generation step: the prompt explicitly instructs the LLM to answer ONLY from provided
+context and admit when the answer isn't present, which correctly overrode the LLM's
+general pretrained knowledge about Tesla/Apple in both cases. This confirms the grounding
+discipline built into `build_prompt()` (Step 5.3) works as intended even under adversarial/
+out-of-scope questioning.
+
+**Status:** Done. RAG system verified to correctly refuse ungrounded answers rather than
+hallucinate.
+
+
 *(to be filled in as we go)*
